@@ -95,7 +95,7 @@ public class PhoneBookSelectorsTest {
         //navigate to contacts page
         WebElement navBtnContacts = driver.findElement(By.linkText("CONTACTS"));
         navBtnContacts.click();
-        pause(3);
+        pause(1);
 
         //open contact details
         WebElement contactDetails = driver.findElement(By.tagName("h2"));
