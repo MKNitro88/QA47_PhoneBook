@@ -68,7 +68,7 @@ public class PhoneBookSelectorsTest {
         String address = "TestAddress";
         String description = "TestDescription"; // optional
 
-        //input fields
+        //input  contact fields
         WebElement inputName = driver.findElement(By.cssSelector("input[placeholder='Name']"));
         inputName.sendKeys(name);
         pause(1);
@@ -104,21 +104,9 @@ public class PhoneBookSelectorsTest {
                 .perform();
         pause(3);
         //quit the driver
-        driver.close();
         driver.quit();
-
-
-
-         /*
-         home work
-         1. open the page
-         2. navigate to about page
-         3. navigate to login page
-         4. enter the email and password
-         5. click on login button
-         6. use pause() from FirstTest class
-          */
     }
+
 
     public static void pause(int seconds) {
         try {
