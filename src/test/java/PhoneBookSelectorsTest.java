@@ -26,11 +26,20 @@ public class PhoneBookSelectorsTest {
         WebElement navBtnAbout = driver.findElement(By.linkText("ABOUT"));
         navBtnAbout.click();
         pause(2);
+        WebElement div = driver.findElement(By.cssSelector("div[class='about_main__2Uv5W']"));
+        String aboutText = div.getText();
+        System.out.println("About text: " + aboutText);
+                WebElement divH1 = driver.findElement(By.cssSelector("div[class='about_main__2Uv5W']>h1"));
+        String h1Text = divH1.getText();
+        System.out.println("About text: " + h1Text);
+
+
+
 
         //navigate to login page
-        WebElement navBtnLogin = driver.findElement(By.linkText("LOGIN"));
-        navBtnLogin.click();
-        pause(2);
+        //WebElement navBtnLogin = driver.findElement(By.cssSelector("div[class='navbar-component_nav__1X_4m'] a:nth-child(4)")
+        //navBtnLogin.click();
+        //pause(2);
 
         //enter the email and password
         WebElement inputEmail = driver.findElement(By.name("email"));
