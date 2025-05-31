@@ -23,7 +23,7 @@ public class HomePage extends BasePage {
     WebElement btnContactsHeader;
     @FindBy(xpath = "//a[text()='ADD']")
     WebElement btnAddHeader;
-    @FindBy(xpath = "//button[Text()='Sign Out']")
+    @FindBy(xpath = "//button[text()='Sign Out']")
     WebElement btnSignOutHeader;
     @FindBy(xpath = "//*[@id='root']/div[2]/div[1]/div[1]")
     WebElement divHomeText;
@@ -55,6 +55,9 @@ public class HomePage extends BasePage {
     public boolean isDivHomeDisplayed() {
         return divHomeText.isDisplayed();
 
+    }
+    public boolean isBtnContactsHeaderDisplayed() {
+        return btnContactsHeader.isDisplayed();
     }
 
 }
