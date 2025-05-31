@@ -11,7 +11,7 @@ public class HomeTests extends ApplicationManager {
     @Test
     public void navToHomePagePositiveTest() {
         HomePage homePage = new HomePage(getDriver());
-        pause(3);
+        pause(2);
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(homePage.getDivHomeText().contains("Home Component"));
         softAssert.assertTrue(homePage.isDivHomeDisplayed());

@@ -16,9 +16,12 @@ public class LoginTests extends ApplicationManager {
     public void loginPositiveTest() {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
+        pause(2);
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
+        pause(2);
         loginPage.fillLoginForm(testEmail, testPassword);
+        pause(1);
         loginPage.clickBtnLogin();
         pause(3);
         softAssert.assertTrue(homePage.isBtnSignOutHeaderDisplayed()," Login failed, Sign Out button is not displayed");
