@@ -24,9 +24,8 @@ public class LoginTests extends ApplicationManager {
         pause(1);
         loginPage.clickBtnLogin();
         pause(3);
-        softAssert.assertTrue(homePage.isBtnSignOutHeaderDisplayed()," Login failed, Sign Out button is not displayed");
-        softAssert.assertTrue(homePage.isBtnContactsHeaderDisplayed(),
-                "Login failed, Contacts button is not displayed");
+        softAssert.assertTrue(homePage.isBtnSignOutHeaderDisplayed(),"Login failed");
+        softAssert.assertTrue(homePage.isBtnContactsHeaderDisplayed(), "Login failed");
         softAssert.assertAll();
         ;
 
