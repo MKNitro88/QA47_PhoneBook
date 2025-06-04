@@ -1,17 +1,25 @@
 package pages;
 
+import dto.User;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver driver) {
         setDriver(driver);
         PageFactory.initElements(new AjaxElementLocatorFactory(driver, 10), this);
     }
-    @FindBy(xpath = "//div[@class='login_login__3EHKB']/form]")
+    @FindBy(xpath = "//div[@class='login_login__3EHKB']")
     WebElement formLogin;
     @FindBy(xpath = "//input[@name='email']")
     WebElement inputEmail;
@@ -22,9 +30,11 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//button[@name='registration']")
     WebElement btnRegistration;
 
-    public void fillLoginForm(String email, String password) {
-        inputEmail.sendKeys(email);
-        inputPassword.sendKeys(password);
+
+
+    public void fillLoginForm(User user) {
+        inputEmail.sendKeys(user.getEmail());
+        inputPassword.sendKeys(user.getPassword());
     }
     public void clickBtnLogin() {
         btnLogin.click();
@@ -32,5 +42,12 @@ public class LoginPage extends BasePage{
     public void clickBtnRegistration() {
         btnRegistration.click();
     }
+    public void closeAlert() {
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(alertIsPresent());
+        alert.accept();
+    }
 
+    public boolean isErrorMessageDisplayed(String text) {
+        return isTextElementPreseant(formLogin, text);
+    }
 }

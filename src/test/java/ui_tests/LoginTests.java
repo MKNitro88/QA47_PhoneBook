@@ -1,8 +1,14 @@
 package ui_tests;
 
+import dto.User;
 import manager.ApplicationManager;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -14,20 +20,36 @@ public class LoginTests extends ApplicationManager {
 
     @Test
     public void loginPositiveTest() {
-        SoftAssert softAssert = new SoftAssert();
+        User user = new User(testEmail, testPassword);
         HomePage homePage = new HomePage(getDriver());
         pause(2);
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
         pause(2);
-        loginPage.fillLoginForm(testEmail, testPassword);
+        loginPage.fillLoginForm(user);
         pause(1);
         loginPage.clickBtnLogin();
         pause(3);
-        softAssert.assertTrue(homePage.isBtnSignOutHeaderDisplayed(),"Login failed");
-        softAssert.assertTrue(homePage.isBtnContactsHeaderDisplayed(), "Login failed");
-        softAssert.assertAll();
-        ;
+        ContactPage contactPage = new ContactPage(getDriver());
+        Assert.assertTrue(contactPage.isBtnContactsHeaderDisplayed(),"Login failed");
+
+    }
+    @Test
+    public void loginNegativeTest_wrongPassword() {
+        User user = new User(testEmail, "wrongPassword");
+        HomePage homePage = new HomePage(getDriver());
+        pause(2);
+        homePage.clickBtnLoginHeader();
+        LoginPage loginPage = new LoginPage(getDriver());
+        pause(2);
+        loginPage.fillLoginForm(user);
+        pause(1);
+        loginPage.clickBtnLogin();
+        pause(3);
+        loginPage.closeAlert();
+        Assert.assertTrue(loginPage.isErrorMessageDisplayed("Login Failed with code 401"), "Error message is not displayed");
+
+
 
     }
 }
