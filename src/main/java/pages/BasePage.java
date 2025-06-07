@@ -23,5 +23,12 @@ public class BasePage {
     }
     public boolean isTextElementPreseant(WebElement element, String text) {
         return element.getText().contains(text);
+    }
+    public boolean isAlertTextContains(String text){
+        try {
+            return driver.switchTo().alert().getText().contains(text);
+        } catch (Exception e) {
+            return false;
         }
+    }
 }

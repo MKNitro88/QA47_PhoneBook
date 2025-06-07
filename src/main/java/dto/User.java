@@ -1,5 +1,7 @@
 package dto;
 
+import java.util.Random;
+
 public class User {
     private String email;
     private String password;
@@ -25,6 +27,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public void generateRandomUser(){
+        Random random = new Random();
+        this.email = "User" + random.nextInt(1000,9999) + "@example.com";
+        this.password = "Password@" + random.nextInt(1000,9999);
+
+
     }
 
     @Override
