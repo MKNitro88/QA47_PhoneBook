@@ -18,14 +18,10 @@ public class LoginTests extends ApplicationManager {
     public void loginPositiveTest() {
         User user = new User(testEmail, testPassword);
         HomePage homePage = new HomePage(getDriver());
-        pause(1);
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        pause(1);
         loginPage.fillLoginForm(user);
-        pause(1);
         loginPage.clickBtnLogin();
-        pause(3);
         ContactPage contactPage = new ContactPage(getDriver());
         Assert.assertTrue(contactPage.isBtnContactsHeaderDisplayed(),"Login failed");
 
@@ -34,14 +30,10 @@ public class LoginTests extends ApplicationManager {
     public void loginNegativeTest_wrongPassword() {
         User user = new User(testEmail, "wrongPassword");
         HomePage homePage = new HomePage(getDriver());
-        pause(1);
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        pause(1);
         loginPage.fillLoginForm(user);
-        pause(1);
         loginPage.clickBtnLogin();
-        pause(3);
         Assert.assertTrue(loginPage.isAlertTextContains("Wrong email or password"));
         loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed("Login Failed with code 401"));
@@ -53,14 +45,10 @@ public class LoginTests extends ApplicationManager {
     public void LoginNegativeTest_EmptyFields() {
         User user = new User("","");
         HomePage homePage = new HomePage(getDriver());
-        pause(1);
         homePage.clickBtnLoginHeader();
         LoginPage loginPage = new LoginPage(getDriver());
-        pause(1);
         loginPage.fillLoginForm(user);
-        pause(1);
         loginPage.clickBtnLogin();
-        pause(3);
         loginPage.closeAlert();
         Assert.assertTrue((loginPage.isErrorMessageDisplayed("Login Failed with code 401")), "Error message is not displayed");
     }

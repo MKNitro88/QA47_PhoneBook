@@ -13,10 +13,8 @@ public class AboutTests extends ApplicationManager {
     public void navToAboutPagePositiveTest() {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(getDriver());
-        pause(1);
         homePage.clickBtnAboutHeader();
         AboutPage aboutPage = new AboutPage(getDriver());
-        pause(1);
         softAssert.assertTrue(aboutPage.isDivAboutDisplayed());
         softAssert.assertTrue(aboutPage.getDivAboutText().contains("Contacts Web Application"));
         softAssert.assertAll();

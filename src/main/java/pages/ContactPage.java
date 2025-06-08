@@ -15,6 +15,7 @@ public class ContactPage extends  BasePage{
     @FindBy(xpath = "//a[text()='CONTACTS']")
     WebElement btnContactsHeader;
 
+
     public boolean isBtnContactsHeaderDisplayed() {
         return isElementPreseant(btnContactsHeader);
     }

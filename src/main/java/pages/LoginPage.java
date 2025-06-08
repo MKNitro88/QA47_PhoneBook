@@ -28,8 +28,14 @@ public class LoginPage extends BasePage{
     WebElement btnLogin;
     @FindBy(xpath = "//button[@name='registration']")
     WebElement btnRegistration;
+    @FindBy(xpath = "//div[@class = 'contact-page_message__2qafk']")
+    WebElement messageNoContacts;
+    @FindBy(xpath = "//button[text()='Sign Out']")
+    WebElement btnSignOutHeader;
 
-
+    public void logOut(){
+        btnSignOutHeader.click();
+    }
 
     public void fillLoginForm(User user) {
         inputEmail.sendKeys(user.getEmail());
@@ -45,8 +51,17 @@ public class LoginPage extends BasePage{
         Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(alertIsPresent());
         alert.accept();
     }
+    public String getAlertText() {
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(alertIsPresent());
+        String text = alert.getText();
+        alert.accept();
+        return text;
+    }
 
     public boolean isErrorMessageDisplayed(String text) {
         return isTextElementPreseant(formLogin, text);
+    }
+    public boolean isContactMessageDisplayed(String text) {
+        return isTextElementPreseant(messageNoContacts, text);
     }
 }
