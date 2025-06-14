@@ -46,7 +46,7 @@ public class RegistrationTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
-        pause(1);
+        pause(2);// Wait for alert to appear, test may fail without this pause
         Assert.assertTrue(loginPage.isAlertTextContains("User already exist"));
         loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed("Registration failed with code 409"));
