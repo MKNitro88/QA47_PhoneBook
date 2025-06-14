@@ -1,4 +1,6 @@
 package ui_tests;
 
-public class ContactsTests {
+import manager.ApplicationManager;
+
+public class ContactsTests extends ApplicationManager {
 }

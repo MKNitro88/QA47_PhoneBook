@@ -1,6 +1,6 @@
 package pages;
 
-import dto.User;
+import dto.UserLombok;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -37,11 +37,12 @@ public class LoginPage extends BasePage{
         btnSignOutHeader.click();
     }
 
-    public void fillLoginForm(User user) {
+    public void fillLoginForm(UserLombok user) {
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
     }
     public void clickBtnLogin() {
+
         btnLogin.click();
     }
     public void clickBtnRegistration() {
@@ -59,9 +60,11 @@ public class LoginPage extends BasePage{
     }
 
     public boolean isErrorMessageDisplayed(String text) {
+
         return isTextElementPreseant(formLogin, text);
     }
     public boolean isContactMessageDisplayed(String text) {
+
         return isTextElementPreseant(messageNoContacts, text);
     }
 }

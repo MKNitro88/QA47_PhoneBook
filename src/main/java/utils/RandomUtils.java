@@ -27,4 +27,12 @@ public class RandomUtils {
         String domain = domains[random.nextInt(domains.length)];
         return (generateString(length) + domain);
     }
+    public static String generatePhoneNumber(int length) {
+        StringBuilder phoneNumber = new StringBuilder("054");
+        for (int i = 0; i < length - 3; i++) {
+            phoneNumber.append(random.nextInt(10)); // Append a random digit
+        }
+        return phoneNumber.toString();
+
+    }
 }

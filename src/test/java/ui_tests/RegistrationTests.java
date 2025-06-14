@@ -1,15 +1,19 @@
 package ui_tests;
 
 import dto.User;
+import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
+import utils.HeaderMenuItem;
 
+import static pages.BasePage.clickButtonsOnHeader;
 import static pages.BasePage.pause;
+import static utils.RandomUtils.generateEmail;
+import static utils.RandomUtils.generateString;
 
 public class RegistrationTests extends ApplicationManager {
     String testEmail = "mail@mail.mail";
@@ -20,14 +24,15 @@ public class RegistrationTests extends ApplicationManager {
     @BeforeMethod
     public void goToRegistrationPage() {
         homePage = new HomePage(getDriver());
-        homePage.clickBtnLoginHeader();
-        loginPage = new LoginPage(getDriver());
+        loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
     }
 
     @Test
     public void registrationPositiveTest() {
-        User user = new User();
-        user.generateRandomUser();
+        UserLombok user = UserLombok.builder()
+                .email(generateEmail(5))
+                .password(generateString(6) + "1Z!")
+                .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
         Assert.assertTrue(loginPage.isContactMessageDisplayed("Add new by clicking on Add in NavBar"));
@@ -35,9 +40,13 @@ public class RegistrationTests extends ApplicationManager {
 
     @Test
     public void registrationNegativeTest_ExistingUser() {
-        User user = new User(testEmail, testPassword);
+        UserLombok user = UserLombok.builder()
+                .email(testEmail)
+                .password(testPassword)
+                .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
+        pause(1);
         Assert.assertTrue(loginPage.isAlertTextContains("User already exist"));
         loginPage.closeAlert();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed("Registration failed with code 409"));
@@ -46,7 +55,10 @@ public class RegistrationTests extends ApplicationManager {
 
     @Test
     public void registrationNegativeTest_wrongFormat() {
-        User user = new User("@!#","@!#");
+        UserLombok user = UserLombok.builder()
+                .email("@!#")
+                .password("@!#")
+                .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
         Assert.assertTrue(loginPage.getAlertText().contains("Wrong email or password format"));
