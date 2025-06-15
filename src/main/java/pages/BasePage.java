@@ -3,7 +3,11 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.HeaderMenuItem;
+
+import java.time.Duration;
 
 public class BasePage {
     static WebDriver driver;
@@ -20,8 +24,11 @@ public class BasePage {
         }
     }
     public static <T extends BasePage> T clickButtonsOnHeader(HeaderMenuItem headerMenuItem) {
-        WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
-        element.click();
+
+        //WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(By.xpath(headerMenuItem.getLocator())))
+                .click();
         switch (headerMenuItem) {
             case HOME -> {
                 return (T) new HomePage(driver);

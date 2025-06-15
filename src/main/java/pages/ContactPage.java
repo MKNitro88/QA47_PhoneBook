@@ -1,6 +1,7 @@
 package pages;
 
 import dto.ContactLombok;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -36,6 +37,10 @@ public class ContactPage extends  BasePage{
         return false;
     }
     public Integer getContactsSize() {
+        return contactsList.size();
+    }
+    public Integer getContactsListSize2UseFindElement() {
+        List<WebElement> contactsFindElement = driver.findElements(By.xpath("//div[@class = 'contact-item_card__2SOIM']"));
         return contactsList.size();
     }
 
