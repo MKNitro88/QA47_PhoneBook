@@ -32,7 +32,7 @@ public class AddPage extends BasePage{
     WebElement inputAddress;
     @FindBy(xpath = "//input[@placeholder='description']")
     WebElement inputDescription;
-    @FindBy(xpath = "//button/b")
+    @FindBy(xpath = "//b/..")
     WebElement btnAddContact;
     @FindBy(xpath = "//div[@class = 'contact-item_card__2SOIM']/h2")
     List<WebElement> contactsList;

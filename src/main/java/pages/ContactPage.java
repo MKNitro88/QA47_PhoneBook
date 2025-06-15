@@ -17,7 +17,7 @@ public class ContactPage extends  BasePage{
     }
     @FindBy(xpath = "//a[text()='CONTACTS']")
     WebElement btnContactsHeader;
-    @FindBy(xpath = "//div[@class = 'contact-item_card__2SOIM']/h2")
+    @FindBy(xpath = "//div[@class = 'contact-item_card__2SOIM']")
     List<WebElement> contactsList;
 
 
@@ -28,11 +28,15 @@ public class ContactPage extends  BasePage{
     public boolean isContactInList(ContactLombok contact){
         for (WebElement contactElement : contactsList) {
             System.out.println(contactElement.getText());
-            if (contactElement.getText().contains(contact.getName())){
+            if (contactElement.getText().contains(contact.getName())
+                    && contactElement.getText().contains(contact.getPhone())){
                 return true;
             }
         }
         return false;
+    }
+    public Integer getContactsSize() {
+        return contactsList.size();
     }
 
 }

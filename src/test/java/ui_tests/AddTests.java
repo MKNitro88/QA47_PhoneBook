@@ -13,7 +13,6 @@ import pages.LoginPage;
 import utils.HeaderMenuItem;
 
 import static pages.BasePage.clickButtonsOnHeader;
-import static pages.BasePage.pause;
 import static utils.RandomUtils.*;
 
 public class AddTests extends ApplicationManager {
@@ -21,6 +20,8 @@ public class AddTests extends ApplicationManager {
     LoginPage loginPage;
     AddPage addPage;
     ContactPage contactPage;
+
+    int sizeBeforeAdd;
     String testEmail = "mail@mail.mail";
     String testPassword = "123456Q$qqq";
 
@@ -34,6 +35,8 @@ public class AddTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
+        contactPage =clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
+        sizeBeforeAdd = contactPage.getContactsSize();
         addPage = clickButtonsOnHeader(HeaderMenuItem.ADD);
 
 
@@ -49,7 +52,10 @@ public class AddTests extends ApplicationManager {
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        Assert.assertTrue(addPage.isContactInList(contact));
+        int sizeAfterAdd = contactPage.getContactsSize();
+        Assert.assertTrue(contactPage.isContactInList(contact));
+        Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "Contact was not added");
+
 
 
     }
