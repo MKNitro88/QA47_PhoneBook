@@ -49,7 +49,6 @@ public class AddTests extends ApplicationManager {
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        pause(2);
         Assert.assertTrue(addPage.isContactInList(contact));
 
 

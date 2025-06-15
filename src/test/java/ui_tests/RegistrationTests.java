@@ -46,9 +46,7 @@ public class RegistrationTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
-        pause(2);// Wait for alert to appear, test may fail without this pause
-        Assert.assertTrue(loginPage.isAlertTextContains("User already exist"));
-        loginPage.closeAlert();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("User already exist"));
         Assert.assertTrue(loginPage.isErrorMessageDisplayed("Registration failed with code 409"));
 
     }
@@ -61,7 +59,7 @@ public class RegistrationTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnRegistration();
-        Assert.assertTrue(loginPage.getAlertText().contains("Wrong email or password format"));
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password format"));
     }
 
 }

@@ -49,10 +49,6 @@ public class BasePage {
         return element.getText().contains(text);
     }
     public boolean isAlertTextContains(String text){
-        try {
             return driver.switchTo().alert().getText().contains(text);
-        } catch (Exception e) {
-            return false;
-        }
     }
 }

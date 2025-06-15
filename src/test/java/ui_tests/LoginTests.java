@@ -1,6 +1,5 @@
 package ui_tests;
 
-import dto.User;
 import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
@@ -47,9 +46,7 @@ public class LoginTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
-        pause(2);
-        Assert.assertTrue(loginPage.isAlertTextContains("Wrong email or password"));
-        loginPage.closeAlert();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password"));
         Assert.assertTrue(loginPage.isErrorMessageDisplayed("Login Failed with code 401"));
 
 
@@ -63,7 +60,7 @@ public class LoginTests extends ApplicationManager {
                 .build();
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
-        loginPage.closeAlert();
+        Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password"));
         Assert.assertTrue((loginPage.isErrorMessageDisplayed("Login Failed with code 401")), "Error message is not displayed");
     }
 }

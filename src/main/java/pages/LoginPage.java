@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -48,12 +49,15 @@ public class LoginPage extends BasePage{
     public void clickBtnRegistration() {
         btnRegistration.click();
     }
-    public void closeAlert() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(alertIsPresent());
+    public void closeAlert(){
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.alertIsPresent());
+        System.out.println(alert.getText());
         alert.accept();
     }
-    public String getAlertText() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5)).until(alertIsPresent());
+    public String closeAlertReturnText(){
+        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.alertIsPresent());
         String text = alert.getText();
         alert.accept();
         return text;
