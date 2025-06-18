@@ -10,6 +10,8 @@ import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
 
+import java.lang.reflect.Method;
+
 import static pages.BasePage.clickButtonsOnHeader;
 import static pages.BasePage.pause;
 
@@ -27,11 +29,13 @@ public class LoginTests extends ApplicationManager {
     }
 
     @Test
-    public void loginPositiveTest() {
+    public void loginPositiveTest(Method method) {
+        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .email(testEmail)
                 .password(testPassword)
                 .build();
+        logger.info("test data: " + user);
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
         ContactPage contactPage = new ContactPage(getDriver());

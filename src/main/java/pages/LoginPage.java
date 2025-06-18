@@ -39,6 +39,7 @@ public class LoginPage extends BasePage{
     }
 
     public void fillLoginForm(UserLombok user) {
+        logger.info("type logging form with data "+ user);
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
     }
