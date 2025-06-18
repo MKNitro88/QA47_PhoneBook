@@ -61,4 +61,15 @@ public class BasePage {
     public boolean isAlertTextContains(String text){
             return driver.switchTo().alert().getText().contains(text);
     }
+    public boolean isButtonClickable(WebElement element) {
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(10))
+                    .until(ExpectedConditions.elementToBeClickable(element));
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }
+

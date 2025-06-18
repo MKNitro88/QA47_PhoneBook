@@ -16,8 +16,8 @@ public class RandomUtils {
         char[] randomString = new char[length];
         int index = 0;
         for (int i = 0; i < length; i++) {
-            index = random.nextInt(characters.length());   //2 == c
-            randomString[i] = characters.charAt(index);  //[0] - [c]
+            index = random.nextInt(characters.length());
+            randomString[i] = characters.charAt(index); 
         }
         return new String(randomString);
     }
@@ -30,7 +30,7 @@ public class RandomUtils {
     public static String generatePhoneNumber(int length) {
         StringBuilder phoneNumber = new StringBuilder("054");
         for (int i = 0; i < length - 3; i++) {
-            phoneNumber.append(random.nextInt(10)); // Append a random digit
+            phoneNumber.append(random.nextInt(10));
         }
         return phoneNumber.toString();
 
