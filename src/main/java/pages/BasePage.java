@@ -63,12 +63,20 @@ public class BasePage {
     }
     public boolean isButtonClickable(WebElement element) {
         try {
-            new WebDriverWait(driver, Duration.ofSeconds(10))
+            new WebDriverWait(driver, Duration.ofSeconds(5))
                     .until(ExpectedConditions.elementToBeClickable(element));
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+    public boolean validateUrl(String url) {
+        return new WebDriverWait(driver,Duration.ofSeconds(5))
+                .until(ExpectedConditions.urlContains(url));
+    }
+    public boolean urlNotContains(String url) {
+        return new WebDriverWait(driver, Duration.ofSeconds(5))
+                .until(ExpectedConditions.not(ExpectedConditions.urlContains(url)));
     }
 
 }

@@ -13,6 +13,7 @@ import pages.LoginPage;
 import utils.HeaderMenuItem;
 
 import static pages.BasePage.clickButtonsOnHeader;
+import static pages.BasePage.pause;
 import static utils.RandomUtils.*;
 
 public class AddTests extends ApplicationManager {
@@ -25,6 +26,7 @@ public class AddTests extends ApplicationManager {
     int sizeBeforeAdd;
     String testEmail = "mail@mail.mail";
     String testPassword = "123456Q$qqq";
+    String existingPhone;
 
     @BeforeMethod
     public void goToLoginPage() {
@@ -38,8 +40,10 @@ public class AddTests extends ApplicationManager {
         loginPage.clickBtnLogin();
         contactPage =clickButtonsOnHeader(HeaderMenuItem.CONTACTS);
         sizeBeforeAdd = contactPage.getContactsSize();
+        existingPhone = contactPage.getPhoneNumberFromContact();
         addPage = clickButtonsOnHeader(HeaderMenuItem.ADD);
         urlBeforeAdd = getDriver().getCurrentUrl();
+
 
 
     }
@@ -69,8 +73,7 @@ public class AddTests extends ApplicationManager {
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        String urlAfterAdd = getDriver().getCurrentUrl();
-        Assert.assertEquals(urlAfterAdd, urlBeforeAdd,
+        Assert.assertTrue(addPage.validateUrl("/add"),
                 "Negative add contact - no name");
 
     }
@@ -85,9 +88,9 @@ public class AddTests extends ApplicationManager {
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        String urlAfterAdd = getDriver().getCurrentUrl();
-        Assert.assertEquals(urlAfterAdd, urlBeforeAdd,
+        Assert.assertTrue(addPage.validateUrl("/add"),
                 "Negative add contact - no last name");
+        Assert.assertTrue(addPage.isAddContactButtonDisplayed());
 
     }
     @Test
@@ -104,6 +107,25 @@ public class AddTests extends ApplicationManager {
         Assert.assertTrue(addPage.getAlertText()
                 .contains("Phone not valid: Phone number must contain only digits! And length min 10, max 15!"),
                 "negative add contact test - no phone");
+
+    }
+    @Test
+    public void addNegativeTest_ExistingPhone(){
+        System.out.println(existingPhone);
+        ContactLombok contact = ContactLombok.builder()
+                .name(generateString(5))
+                .lastName(generateString(5))
+                .phone(existingPhone)
+                .email(generateEmail(5))
+                .address(generateString(10))
+                .description(generateString(20))
+                .build();
+        addPage.fillAddContactForm(contact);
+        Assert.assertTrue(addPage.validateUrl("/contacts"));
+        //pause(5);
+//        Assert.assertTrue(addPage.getAlertText()
+//                        .contains("Phone not valid: Phone number must contain only digits! And length min 10, max 15!"),
+//                "negative add contact test - no phone");
 
     }
     @Test
@@ -143,14 +165,15 @@ public class AddTests extends ApplicationManager {
         ContactLombok contact = ContactLombok.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
-                .phone(generatePhoneNumber(7))
+                .phone(generatePhoneNumber(8))
                 .email("")
                 .address(generateString(10))
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        String urlAfterAdd = getDriver().getCurrentUrl();
-        Assert.assertEquals(urlAfterAdd, urlBeforeAdd,
+        Assert.assertTrue(addPage.validateUrl("/add"),
+                "Negative add contact - no email");
+        Assert.assertTrue(addPage.urlNotContains("/contacts"),
                 "Negative add contact - no email");
 
     }
@@ -182,9 +205,9 @@ public class AddTests extends ApplicationManager {
                 .description(generateString(20))
                 .build();
         addPage.fillAddContactForm(contact);
-        String urlAfterAdd = getDriver().getCurrentUrl();
-        Assert.assertEquals(urlAfterAdd, urlBeforeAdd,
+        Assert.assertTrue(addPage.validateUrl("/add"),
                 "Negative add contact - no Address");
+        Assert.assertTrue(addPage.urlNotContains("/contacts"));
 
     }
 

@@ -57,6 +57,9 @@ public class AddPage extends BasePage{
         alert.accept();
         return text;
     }
+    public boolean isAddContactButtonDisplayed() {
+        return isElementPreseant(btnAddContact);
+    }
     public boolean isContactInList(ContactLombok contact){
         for (WebElement contactElement : contactsList) {
             System.out.println(contactElement.getText());
