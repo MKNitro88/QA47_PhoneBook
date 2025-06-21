@@ -73,7 +73,7 @@ public class ContactsTests extends ApplicationManager {
         contactPage.clickOnFirstContactInList();
         contactPage.clickBtnRemoveContact();
         int sizeAfterRemove = contactPage.getContactsSize();
-        Assert.assertTrue(sizeBeforeEdit > sizeAfterRemove, "Contact was not removed");
+        Assert.assertEquals(sizeBeforeEdit, sizeAfterRemove +1, "Contact was not removed");
     }
 
 }
