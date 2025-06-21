@@ -13,7 +13,6 @@ import utils.HeaderMenuItem;
 import java.lang.reflect.Method;
 
 import static pages.BasePage.clickButtonsOnHeader;
-import static pages.BasePage.pause;
 
 public class LoginTests extends ApplicationManager {
     String testEmail = "mail@mail.mail";
@@ -21,6 +20,7 @@ public class LoginTests extends ApplicationManager {
 
     HomePage homePage;
     LoginPage loginPage;
+
     @BeforeMethod
     public void goToLoginPage() {
         homePage = new HomePage(getDriver());
@@ -43,11 +43,13 @@ public class LoginTests extends ApplicationManager {
 
     }
     @Test
-    public void loginNegativeTest_wrongPassword() {
+    public void loginNegativeTest_wrongPassword(Method method) {
+        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .email(testEmail)
                 .password("wrongPassword")
                 .build();
+        logger.info("test data: " + user);
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
         Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password"));
@@ -57,11 +59,13 @@ public class LoginTests extends ApplicationManager {
 
     }
     @Test
-    public void LoginNegativeTest_EmptyFields() {
+    public void LoginNegativeTest_EmptyFields(Method method) {
+        logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
                 .email("")
                 .password("")
                 .build();
+        logger.info("test data: " + user);
         loginPage.fillLoginForm(user);
         loginPage.clickBtnLogin();
         Assert.assertTrue(loginPage.closeAlertReturnText().contains("Wrong email or password"));

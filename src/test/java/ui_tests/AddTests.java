@@ -13,7 +13,6 @@ import pages.LoginPage;
 import utils.HeaderMenuItem;
 
 import static pages.BasePage.clickButtonsOnHeader;
-import static pages.BasePage.pause;
 import static utils.RandomUtils.*;
 
 public class AddTests extends ApplicationManager {

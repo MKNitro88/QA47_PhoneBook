@@ -1,6 +1,5 @@
 package pages;
 
-import manager.ApplicationManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +27,6 @@ public class BasePage {
     }
     public static <T extends BasePage> T clickButtonsOnHeader(HeaderMenuItem headerMenuItem) {
 
-        //WebElement element = driver.findElement(By.xpath(headerMenuItem.getLocator()));
         new WebDriverWait(driver, Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(By.xpath(headerMenuItem.getLocator())))
                 .click();
