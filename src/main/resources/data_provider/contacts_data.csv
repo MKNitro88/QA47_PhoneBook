@@ -1,0 +1,5 @@
+testName, ,0541234567,testMail@mail.com,ashdod 5 st,optional test description
+testName,testLastName, ,testMail@mail.com,ashdod 5 st,optional test description
+testName,testLastName,0541234567, ,ashdod 5 st,optional test description
+testName,testLastName,0541234567,testMail@mail.com, ,optional test description
+testName,testLastName,0541234567,testMail@mail.com,ashdod 5 st,

@@ -1,19 +1,24 @@
 package ui_tests;
 
+import data_provider.ContactsDP;
 import dto.ContactLombok;
 import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.AddPage;
 import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListner;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.*;
+
+@Listeners(TestNGListner.class)
 
 public class AddTests extends ApplicationManager {
     HomePage homePage;
@@ -60,6 +65,14 @@ public class AddTests extends ApplicationManager {
         int sizeAfterAdd = contactPage.getContactsSize();
         Assert.assertTrue(contactPage.isContactInList(contact));
         Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "positive add contact test");
+    }
+    @Test(dataProvider = "addNewContactFromFile", dataProviderClass = ContactsDP.class)
+    public void addContactNegativeTests(ContactLombok contact) {
+        logger.info("test data --> " + contact);
+        addPage.fillAddContactForm(contact);
+        Assert.assertTrue(addPage.validateUrl("/add"));
+        Assert.assertTrue(addPage.isAddContactButtonDisplayed());
+
     }
     @Test
     public void addNegativeTest_NoName(){

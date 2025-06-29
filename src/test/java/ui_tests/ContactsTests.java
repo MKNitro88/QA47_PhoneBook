@@ -5,16 +5,21 @@ import dto.UserLombok;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.AddPage;
 import pages.ContactPage;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.TestNGListner;
+
 import java.lang.reflect.Method;
 import static pages.BasePage.clickButtonsOnHeader;
 import static utils.RandomUtils.generateEmail;
 import static utils.RandomUtils.generateString;
+
+@Listeners(TestNGListner.class)
 
 public class ContactsTests extends ApplicationManager {
     HomePage homePage;
