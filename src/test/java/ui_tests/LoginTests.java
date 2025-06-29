@@ -15,12 +15,14 @@ import utils.TestNGListner;
 import java.lang.reflect.Method;
 
 import static pages.BasePage.clickButtonsOnHeader;
+import static utils.PropertiesReader.getProperty;
+
 @Listeners(TestNGListner.class)
 
 
 public class LoginTests extends ApplicationManager {
-    String testEmail = "mail@mail.mail";
-    String testPassword = "123456Q$qqq";
+    String testEmail = getProperty("login.properties","email");
+    String testPassword = getProperty("login.properties","password");
 
     HomePage homePage;
     LoginPage loginPage;

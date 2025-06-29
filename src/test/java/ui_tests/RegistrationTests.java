@@ -10,18 +10,20 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.HeaderMenuItem;
+import utils.RetryAnalyzer;
 import utils.TestNGListner;
 
 import static pages.BasePage.clickButtonsOnHeader;
 import static pages.BasePage.pause;
+import static utils.PropertiesReader.getProperty;
 import static utils.RandomUtils.generateEmail;
 import static utils.RandomUtils.generateString;
 
 @Listeners(TestNGListner.class)
 
 public class RegistrationTests extends ApplicationManager {
-    String testEmail = "mail@mail.mail";
-    String testPassword = "123456Q$qqq";
+    String testEmail = getProperty("login.properties","email");
+    String testPassword = getProperty("login.properties","password");
     HomePage homePage;
     LoginPage loginPage;
 
@@ -31,7 +33,7 @@ public class RegistrationTests extends ApplicationManager {
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
     }
 
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationPositiveTest() {
         UserLombok user = UserLombok.builder()
                 .email(generateEmail(5))

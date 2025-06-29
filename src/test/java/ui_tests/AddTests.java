@@ -66,12 +66,23 @@ public class AddTests extends ApplicationManager {
         Assert.assertTrue(contactPage.isContactInList(contact));
         Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "positive add contact test");
     }
-    @Test(dataProvider = "addNewContactFromFile", dataProviderClass = ContactsDP.class)
+    @Test(dataProvider = "addNewContactFromFileNegative", dataProviderClass = ContactsDP.class)
     public void addContactNegativeTests(ContactLombok contact) {
         logger.info("test data --> " + contact);
         addPage.fillAddContactForm(contact);
         Assert.assertTrue(addPage.validateUrl("/add"));
         Assert.assertTrue(addPage.isAddContactButtonDisplayed());
+
+    }
+    @Test(dataProvider = "addNewContactFromFilePositive", dataProviderClass = ContactsDP.class)
+    public void addContactPositiveTests(ContactLombok contact) {
+        logger.info("test data --> " + contact);
+        addPage.fillAddContactForm(contact);
+        int sizeAfterAdd = contactPage.getContactsSize();
+        Assert.assertTrue(contactPage.isContactInList(contact));
+        Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "positive add contact test");
+        //Assert.assertTrue(addPage.validateUrl("/add"));
+        //Assert.assertTrue(addPage.isAddContactButtonDisplayed());
 
     }
     @Test
