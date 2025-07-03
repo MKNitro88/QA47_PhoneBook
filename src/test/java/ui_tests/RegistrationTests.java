@@ -36,7 +36,7 @@ public class RegistrationTests extends ApplicationManager {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void registrationPositiveTest() {
         UserLombok user = UserLombok.builder()
-                .email(generateEmail(5))
+                .username(generateEmail(5))
                 .password(generateString(6) + "1Z!")
                 .build();
         loginPage.fillLoginForm(user);
@@ -47,7 +47,7 @@ public class RegistrationTests extends ApplicationManager {
     @Test
     public void registrationNegativeTest_ExistingUser() {
         UserLombok user = UserLombok.builder()
-                .email(testEmail)
+                .username(testEmail)
                 .password(testPassword)
                 .build();
         loginPage.fillLoginForm(user);
@@ -60,7 +60,7 @@ public class RegistrationTests extends ApplicationManager {
     @Test
     public void registrationNegativeTest_wrongFormat() {
         UserLombok user = UserLombok.builder()
-                .email("@!#")
+                .username("@!#")
                 .password("@!#")
                 .build();
         loginPage.fillLoginForm(user);

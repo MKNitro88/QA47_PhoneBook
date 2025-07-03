@@ -38,7 +38,7 @@ public class LoginTests extends ApplicationManager {
     public void loginPositiveTest(Method method) {
         logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
-                .email(testEmail)
+                .username(testEmail)
                 .password(testPassword)
                 .build();
         logger.info("test data: " + user);
@@ -52,7 +52,7 @@ public class LoginTests extends ApplicationManager {
     public void loginNegativeTest_wrongPassword(Method method) {
         logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
-                .email(testEmail)
+                .username(testEmail)
                 .password("wrongPassword")
                 .build();
         logger.info("test data: " + user);
@@ -68,7 +68,7 @@ public class LoginTests extends ApplicationManager {
     public void LoginNegativeTest_EmptyFields(Method method) {
         logger.info("start method " + method.getName());
         UserLombok user = UserLombok.builder()
-                .email("")
+                .username("")
                 .password("")
                 .build();
         logger.info("test data: " + user);

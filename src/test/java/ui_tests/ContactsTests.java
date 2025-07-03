@@ -44,7 +44,7 @@ public class ContactsTests extends ApplicationManager {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
         UserLombok user = UserLombok.builder()
-                .email(testEmail)
+                .username(testEmail)
                 .password(testPassword)
                 .build();
         loginPage.fillLoginForm(user);

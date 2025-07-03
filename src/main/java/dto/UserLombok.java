@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 
 public class UserLombok {
-    private String email;
+    private String username;
     private String password;
 }
 
