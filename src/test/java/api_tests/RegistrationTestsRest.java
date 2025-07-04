@@ -95,7 +95,7 @@ public class RegistrationTestsRest  extends AuthentificationController {
     @Test
     public void registrationNegativeTest_409() {
         UserLombok user = UserLombok.builder()
-                .username(getProperty("login.properties", "email"))
+                .username(getProperty("loginPB.properties", "email"))
                 .password("Password123!")
                 .build();
         logger.info("test data: " + user);

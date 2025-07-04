@@ -22,8 +22,8 @@ import static utils.RandomUtils.generateString;
 @Listeners(TestNGListner.class)
 
 public class RegistrationTests extends ApplicationManager {
-    String testEmail = getProperty("login.properties","email");
-    String testPassword = getProperty("login.properties","password");
+    String testEmail = getProperty("loginPB.properties","email");
+    String testPassword = getProperty("loginPB.properties","password");
     HomePage homePage;
     LoginPage loginPage;
 

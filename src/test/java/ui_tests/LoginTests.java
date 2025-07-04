@@ -21,8 +21,8 @@ import static utils.PropertiesReader.getProperty;
 
 
 public class LoginTests extends ApplicationManager {
-    String testEmail = getProperty("login.properties","email");
-    String testPassword = getProperty("login.properties","password");
+    String testEmail = getProperty("loginPB.properties","email");
+    String testPassword = getProperty("loginPB.properties","password");
 
     HomePage homePage;
     LoginPage loginPage;

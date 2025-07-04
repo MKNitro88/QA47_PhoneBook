@@ -13,8 +13,8 @@ import static utils.PropertiesReader.getProperty;
 @Listeners(TestNGListner.class)
 
 public class LoginTests extends AuthentificationController {
-    String validUserName = getProperty("login.properties","email");
-    String validPassword = getProperty("login.properties","password");
+    String validUserName = getProperty("loginPB.properties","email");
+    String validPassword = getProperty("loginPB.properties","password");
 
     @Test
     public void loginPositiveTest_200() {
