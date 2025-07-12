@@ -14,7 +14,7 @@ public class HomePage extends BasePage {
     public HomePage(WebDriver driver)  {
         setDriver(driver);
 //        driver.get("https://telranedu.web.app/home");
-        driver.get(getProperty("login.properties", "url"));
+        driver.get(getProperty("loginPB.properties", "url"));
         PageFactory.initElements(new AjaxElementLocatorFactory(driver,10), this);
     }
     @FindBy(xpath = "//a[text()='HOME']")

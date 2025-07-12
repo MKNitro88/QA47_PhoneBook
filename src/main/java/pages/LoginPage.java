@@ -1,6 +1,6 @@
 package pages;
 
-import dto.UserLombok;
+import dto.UserDto;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -11,8 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.alertIsPresent;
 
 public class LoginPage extends BasePage{
     public LoginPage(WebDriver driver) {
@@ -38,7 +36,7 @@ public class LoginPage extends BasePage{
         btnSignOutHeader.click();
     }
 
-    public void fillLoginForm(UserLombok user) {
+    public void fillLoginForm(UserDto user) {
         logger.info("type logging form with data "+ user);
         inputEmail.sendKeys(user.getUsername());
         inputPassword.sendKeys(user.getPassword());

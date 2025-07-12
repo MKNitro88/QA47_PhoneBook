@@ -1,6 +1,6 @@
 package pages;
 
-import dto.ContactLombok;
+import dto.ContactDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,7 +49,7 @@ public class ContactPage extends  BasePage {
         return isElementPreseant(btnContactsHeader);
     }
 
-    public boolean isContactInList(ContactLombok contact) {
+    public boolean isContactInList(ContactDto contact) {
         for (WebElement contactElement : contactsList) {
             System.out.println(contactElement.getText());
             logger.info("Checking contact in list: " + contactElement.getText());
@@ -95,7 +95,7 @@ public class ContactPage extends  BasePage {
         btnRemoveContact.click();
         pause(1);
     }
-    public void fillEditForm(ContactLombok contact){
+    public void fillEditForm(ContactDto contact){
         logger.info("edit contact form using -> "+ contact);
         inputContactName.clear();
         inputContactName.sendKeys(contact.getName());

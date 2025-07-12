@@ -22,7 +22,7 @@ public class ApplicationManager {
     public Logger logger = LoggerFactory.getLogger(ApplicationManager.class);
 
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp() {
         //logger.info("Start test --> " + LocalDate.now());
         driver = new ChromeDriver();
@@ -32,7 +32,7 @@ public class ApplicationManager {
         WebDriverListener webDriverListner = new WDListner();
         driver = new EventFiringDecorator<>(webDriverListner).decorate(driver);
     }
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown() {
         //logger.info("Stop test --> " + LocalDate.now());
         if (driver != null) {

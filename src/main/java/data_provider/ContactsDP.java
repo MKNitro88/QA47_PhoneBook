@@ -1,6 +1,6 @@
 package data_provider;
 
-import dto.ContactLombok;
+import dto.ContactDto;
 import org.testng.annotations.DataProvider;
 
 import java.io.BufferedReader;
@@ -13,14 +13,14 @@ import java.util.List;
 public class ContactsDP {
 
     @DataProvider
-    public Iterator<ContactLombok> addNewContactFromFileNegative() {
-        List<ContactLombok> list = new ArrayList<>();
+    public Iterator<ContactDto> addNewContactFromFileNegative() {
+        List<ContactDto> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader("src/main/resources/data_provider/contacts_data2 - Sheet1.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitArray = line.split(",");
-                list.add(ContactLombok.builder()
+                list.add(ContactDto.builder()
                         .name(splitArray[0])
                         .lastName(splitArray[1])
                         .phone(splitArray[2])
@@ -36,14 +36,14 @@ public class ContactsDP {
         return list.listIterator();
     }
     @DataProvider
-    public Iterator<ContactLombok> addNewContactFromFilePositive() {
-        List<ContactLombok> list = new ArrayList<>();
+    public Iterator<ContactDto> addNewContactFromFilePositive() {
+        List<ContactDto> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(
                 new FileReader("src/main/resources/data_provider/positive_contacts_data - Sheet1.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitArray = line.split(",");
-                list.add(ContactLombok.builder()
+                list.add(ContactDto.builder()
                         .name(splitArray[0])
                         .lastName(splitArray[1])
                         .phone(splitArray[2])

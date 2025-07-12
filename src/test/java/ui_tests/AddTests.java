@@ -1,8 +1,8 @@
 package ui_tests;
 
 import data_provider.ContactsDP;
-import dto.ContactLombok;
-import dto.UserLombok;
+import dto.ContactDto;
+import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -32,11 +32,11 @@ public class AddTests extends ApplicationManager {
     String testPassword = "123456Q$qqq";
     String existingPhone;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToLoginPage() {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
-        UserLombok user = UserLombok.builder()
+        UserDto user = UserDto.builder()
                 .username(testEmail)
                 .password(testPassword)
                 .build();
@@ -51,9 +51,9 @@ public class AddTests extends ApplicationManager {
 
 
     }
-    @Test
+    @Test(invocationCount = 1, groups = "smoke")
     public void addPositiveTest() {
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(10))
@@ -67,7 +67,7 @@ public class AddTests extends ApplicationManager {
         Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "positive add contact test");
     }
     @Test(dataProvider = "addNewContactFromFileNegative", dataProviderClass = ContactsDP.class)
-    public void addContactNegativeTests(ContactLombok contact) {
+    public void addContactNegativeTests(ContactDto contact) {
         logger.info("test data --> " + contact);
         addPage.fillAddContactForm(contact);
         Assert.assertTrue(addPage.validateUrl("/add"));
@@ -75,7 +75,7 @@ public class AddTests extends ApplicationManager {
 
     }
     @Test(dataProvider = "addNewContactFromFilePositive", dataProviderClass = ContactsDP.class)
-    public void addContactPositiveTests(ContactLombok contact) {
+    public void addContactPositiveTests(ContactDto contact) {
         logger.info("test data --> " + contact);
         addPage.fillAddContactForm(contact);
         int sizeAfterAdd = contactPage.getContactsSize();
@@ -87,7 +87,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_NoName(){
-       ContactLombok contact = ContactLombok.builder()
+       ContactDto contact = ContactDto.builder()
                 .name("")
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(10))
@@ -102,7 +102,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_NoLastName(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName("")
                 .phone(generatePhoneNumber(10))
@@ -118,7 +118,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_NoPhone(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone("")
@@ -135,7 +135,7 @@ public class AddTests extends ApplicationManager {
     @Test
     public void addNegativeTest_ExistingPhone(){
         System.out.println(existingPhone);
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(existingPhone)
@@ -153,7 +153,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_invalidPhoneTooShort(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(1))
@@ -169,7 +169,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_invalidPhoneTooLong(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(16))
@@ -185,7 +185,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_NoEmail(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(8))
@@ -202,7 +202,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_invalidEmailFormat(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(7))
@@ -219,7 +219,7 @@ public class AddTests extends ApplicationManager {
     }
     @Test
     public void addNegativeTest_NoAddress(){
-        ContactLombok contact = ContactLombok.builder()
+        ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
                 .lastName(generateString(5))
                 .phone(generatePhoneNumber(7))

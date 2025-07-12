@@ -1,7 +1,7 @@
 package ui_tests;
 
-import dto.ContactLombok;
-import dto.UserLombok;
+import dto.ContactDto;
+import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -24,13 +24,12 @@ import static utils.RandomUtils.generateString;
 public class ContactsTests extends ApplicationManager {
     HomePage homePage;
     LoginPage loginPage;
-    AddPage addPage;
     ContactPage contactPage;
     String testEmail = "mail@mail.mail";
     String testPassword = "123456Q$qqq";
     int sizeBeforeEdit;
 
-    ContactLombok forTesting = ContactLombok.builder()
+    ContactDto forTesting = ContactDto.builder()
             .name("o9cz4")
             .lastName("mm3ir")
             .phone("0541985766")
@@ -39,11 +38,11 @@ public class ContactsTests extends ApplicationManager {
             .description("l31v31yycnpbdct06juj")
             .build();
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToContactsPage() {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
-        UserLombok user = UserLombok.builder()
+        UserDto user = UserDto.builder()
                 .username(testEmail)
                 .password(testPassword)
                 .build();
@@ -53,11 +52,11 @@ public class ContactsTests extends ApplicationManager {
         sizeBeforeEdit = contactPage.getContactsSize();
     }
 
-    @Test
+    @Test(groups = "smoke")
     public void positiveContactEditTest(Method method) {
         logger.info("start method " + method.getName());
         contactPage.clickOnFirstContactInList();
-        ContactLombok contactEdit = ContactLombok.builder()
+        ContactDto contactEdit = ContactDto.builder()
                 .name(generateString(5))
                 .lastName("edited Last Name")
                 .phone("1234567890")
@@ -72,7 +71,7 @@ public class ContactsTests extends ApplicationManager {
 
 
     }
-    @Test
+    @Test(groups = "smoke")
     public void positiveContactRemoveTest(Method method) {
         logger.info("start method " + method.getName());
         contactPage.clickOnFirstContactInList();

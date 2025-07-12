@@ -17,14 +17,16 @@ import static pages.BasePage.clickButtonsOnHeader;
 public class AboutTests extends ApplicationManager {
     HomePage homePage;
     AboutPage aboutPage;
-    @BeforeMethod
+    SoftAssert softAssert = new SoftAssert();
+
+    @BeforeMethod(alwaysRun = true)
     public void goToAboutPage() {
         homePage = new HomePage(getDriver());
         aboutPage = clickButtonsOnHeader(HeaderMenuItem.ABOUT);
     }
-    @Test
+    @Test(groups = "smoke")
     public void navToAboutPagePositiveTest() {
-        SoftAssert softAssert = new SoftAssert();
+
         softAssert.assertTrue(aboutPage.isDivAboutDisplayed());
         softAssert.assertTrue(aboutPage.getDivAboutText().contains("Contacts Web Application"));
         softAssert.assertAll();

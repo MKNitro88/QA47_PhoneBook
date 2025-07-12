@@ -1,14 +1,12 @@
 package pages;
 
-import dto.ContactLombok;
-import dto.UserLombok;
+import dto.ContactDto;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -38,7 +36,7 @@ public class AddPage extends BasePage{
     @FindBy(xpath = "//div[@class = 'contact-item_card__2SOIM']/h2")
     List<WebElement> contactsList;
 
-    public void fillAddContactForm(ContactLombok contact) {
+    public void fillAddContactForm(ContactDto contact) {
         inputName.sendKeys(contact.getName());
         inputLastName.sendKeys(contact.getLastName());
         inputPhone.sendKeys(contact.getPhone());
@@ -60,7 +58,7 @@ public class AddPage extends BasePage{
     public boolean isAddContactButtonDisplayed() {
         return isElementPreseant(btnAddContact);
     }
-    public boolean isContactInList(ContactLombok contact){
+    public boolean isContactInList(ContactDto contact){
         for (WebElement contactElement : contactsList) {
             System.out.println(contactElement.getText());
             if (contactElement.getText().contains(contact.getName())){

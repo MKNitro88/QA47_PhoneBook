@@ -11,10 +11,11 @@ import utils.TestNGListner;
 
 
 public class HomeTests extends ApplicationManager {
-    @Test
+    SoftAssert softAssert = new SoftAssert();
+
+    @Test(groups = "smoke")
     public void navToHomePagePositiveTest() {
         HomePage homePage = new HomePage(getDriver());
-        SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(homePage.getDivHomeText().contains("Home Component"));
         softAssert.assertTrue(homePage.isDivHomeDisplayed());
         softAssert.assertAll();

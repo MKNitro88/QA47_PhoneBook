@@ -1,7 +1,6 @@
 package ui_tests;
 
-import dto.User;
-import dto.UserLombok;
+import dto.UserDto;
 import manager.ApplicationManager;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
@@ -14,7 +13,6 @@ import utils.RetryAnalyzer;
 import utils.TestNGListner;
 
 import static pages.BasePage.clickButtonsOnHeader;
-import static pages.BasePage.pause;
 import static utils.PropertiesReader.getProperty;
 import static utils.RandomUtils.generateEmail;
 import static utils.RandomUtils.generateString;
@@ -27,15 +25,15 @@ public class RegistrationTests extends ApplicationManager {
     HomePage homePage;
     LoginPage loginPage;
 
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void goToRegistrationPage() {
         homePage = new HomePage(getDriver());
         loginPage = clickButtonsOnHeader(HeaderMenuItem.LOGIN);
     }
 
-    @Test(retryAnalyzer = RetryAnalyzer.class)
+    @Test(groups = "smoke")
     public void registrationPositiveTest() {
-        UserLombok user = UserLombok.builder()
+        UserDto user = UserDto.builder()
                 .username(generateEmail(5))
                 .password(generateString(6) + "1Z!")
                 .build();
@@ -46,7 +44,7 @@ public class RegistrationTests extends ApplicationManager {
 
     @Test
     public void registrationNegativeTest_ExistingUser() {
-        UserLombok user = UserLombok.builder()
+        UserDto user = UserDto.builder()
                 .username(testEmail)
                 .password(testPassword)
                 .build();
@@ -59,7 +57,7 @@ public class RegistrationTests extends ApplicationManager {
 
     @Test
     public void registrationNegativeTest_wrongFormat() {
-        UserLombok user = UserLombok.builder()
+        UserDto user = UserDto.builder()
                 .username("@!#")
                 .password("@!#")
                 .build();
