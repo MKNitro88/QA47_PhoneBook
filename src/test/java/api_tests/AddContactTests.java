@@ -58,7 +58,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertAll();
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addContactPositive_200_WOEmail() {
         System.out.println(contactListSize);
         ContactDto contact  = ContactDto.builder()
@@ -84,7 +84,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertEquals(contactList.getContactsCount(), contactListSize + 1);
         softAssert.assertAll();
     }
-    @Test
+    @Test(groups = "contacts")
     public void addContactPositive_200_WOPhone() {
         ContactDto contact  = ContactDto.builder()
                 .name("testName2_" + generateString(5))
@@ -110,7 +110,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(groups = "contacts")
     public void addContactNegativeTest_401_invalidToken() {
         ContactDto contact  = ContactDto.builder()
                 .name("testName2_" + generateString(5))
@@ -138,7 +138,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertEquals(contactList.getContactsCount(), contactListSize);
         softAssert.assertAll();
     }
-    @Test
+    @Test(groups = "contacts")
     public void addContactNegativeTest_400_WOFirstName() {
         ContactDto contact  = ContactDto.builder()
                 .lastName("testLastName2_" + generateString(5))
@@ -163,7 +163,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertEquals(contactList.getContactsCount(), contactListSize);
         softAssert.assertAll();
     }
-    @Test
+    @Test(groups = "contacts")
     public void addContactNegativeTest_400_WOLastName() {
         ContactDto contact  = ContactDto.builder()
                 .name("testName2_" + generateString(5))
@@ -188,7 +188,7 @@ public class AddContactTests extends ContactController {
         softAssert.assertEquals(contactList.getContactsCount(), contactListSize);
         softAssert.assertAll();
     }
-    @Test
+    @Test(groups = "contacts")
     public void addContactNegativeTest_400_WOAddress() {
         ContactDto contact  = ContactDto.builder()
                 .name("testName1_" + generateString(5))

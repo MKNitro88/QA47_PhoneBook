@@ -3,7 +3,7 @@
     <test name="smoke_tests">
         <groups>
             <run>
-                <include name="smoke"/>
+                <include name="contacts"/>
             </run>
         </groups>
         <classes>

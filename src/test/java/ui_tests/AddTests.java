@@ -66,7 +66,7 @@ public class AddTests extends ApplicationManager {
         Assert.assertTrue(contactPage.isContactInList(contact));
         Assert.assertEquals(sizeAfterAdd, sizeBeforeAdd + 1, "positive add contact test");
     }
-    @Test(dataProvider = "addNewContactFromFileNegative", dataProviderClass = ContactsDP.class)
+    @Test(dataProvider = "addNewContactFromFileNegative", dataProviderClass = ContactsDP.class,groups = "contacts")
     public void addContactNegativeTests(ContactDto contact) {
         logger.info("test data --> " + contact);
         addPage.fillAddContactForm(contact);
@@ -74,7 +74,7 @@ public class AddTests extends ApplicationManager {
         Assert.assertTrue(addPage.isAddContactButtonDisplayed());
 
     }
-    @Test(dataProvider = "addNewContactFromFilePositive", dataProviderClass = ContactsDP.class)
+    @Test(dataProvider = "addNewContactFromFilePositive", dataProviderClass = ContactsDP.class,groups = "contacts")
     public void addContactPositiveTests(ContactDto contact) {
         logger.info("test data --> " + contact);
         addPage.fillAddContactForm(contact);
@@ -85,7 +85,7 @@ public class AddTests extends ApplicationManager {
         //Assert.assertTrue(addPage.isAddContactButtonDisplayed());
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_NoName(){
        ContactDto contact = ContactDto.builder()
                 .name("")
@@ -100,7 +100,7 @@ public class AddTests extends ApplicationManager {
                 "Negative add contact - no name");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_NoLastName(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -116,7 +116,7 @@ public class AddTests extends ApplicationManager {
         Assert.assertTrue(addPage.isAddContactButtonDisplayed());
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_NoPhone(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -132,7 +132,7 @@ public class AddTests extends ApplicationManager {
                 "negative add contact test - no phone");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_ExistingPhone(){
         System.out.println(existingPhone);
         ContactDto contact = ContactDto.builder()
@@ -151,7 +151,7 @@ public class AddTests extends ApplicationManager {
 //                "negative add contact test - no phone");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_invalidPhoneTooShort(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -167,7 +167,7 @@ public class AddTests extends ApplicationManager {
                 "negative add contact test - phone less than 10 digits");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_invalidPhoneTooLong(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -183,7 +183,7 @@ public class AddTests extends ApplicationManager {
                 "negative add contact test - phone more than 15 digits");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_NoEmail(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -200,7 +200,7 @@ public class AddTests extends ApplicationManager {
                 "Negative add contact - no email");
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_invalidEmailFormat(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))
@@ -217,7 +217,7 @@ public class AddTests extends ApplicationManager {
 
 
     }
-    @Test
+    @Test(groups = "contacts")
     public void addNegativeTest_NoAddress(){
         ContactDto contact = ContactDto.builder()
                 .name(generateString(5))

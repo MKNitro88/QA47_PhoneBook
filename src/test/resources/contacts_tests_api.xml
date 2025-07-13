@@ -1,9 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="suite1" verbose="1">
-    <test name="smoke_tests">
+    <test name="contacts_tests">
         <groups>
             <run>
-                <include name="smoke"/>
                 <include name="contacts"/>
             </run>
         </groups>

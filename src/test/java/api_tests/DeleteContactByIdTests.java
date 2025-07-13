@@ -48,7 +48,7 @@ public class DeleteContactByIdTests extends ContactController {
         ;
     }
 
-    @Test
+    @Test(groups = "contacts")
     public void deleteContactByIdNegativeTest_401_invalidToken(){
         TokenDto tokenDto1 = TokenDto.builder().token("invalid").build();
         Response response = deleteContactById(contact, tokenDto1);
