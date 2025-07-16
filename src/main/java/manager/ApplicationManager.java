@@ -2,8 +2,11 @@ package manager;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.events.EventFiringDecorator;
 import org.openqa.selenium.support.events.WebDriverListener;
 import org.slf4j.Logger;
@@ -35,13 +38,20 @@ public class ApplicationManager {
 
 
     @BeforeMethod(alwaysRun = true)
-    public void setUp() {
+    @Parameters("browser")
+    public void setUp(@Optional("chrome") String browser) {
         //logger.info("Start test --> " + LocalDate.now());
         //driver = new ChromeDriver();
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        FirefoxOptions firefoxOptions = new FirefoxOptions();
+        firefoxOptions.addArguments("--headless");
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--headless");
         switch(browser.toLowerCase()){
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", "c:/tools/chromedriver.exe");
-                driver = new ChromeDriver();
+                driver = new ChromeDriver(chromeOptions);
                 logger.info("running tests in Chrome browser");
                 break;
             case "firefox":

@@ -1,0 +1,3 @@
+./gradlew clean smoke_tests <-test name
+./gradlew clean -Pbrowser=chrome smoke_tests  - -P <-property = value
+./gradlew
